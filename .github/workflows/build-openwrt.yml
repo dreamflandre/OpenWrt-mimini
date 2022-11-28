@@ -140,7 +140,7 @@ jobs:
       run: |
         cd openwrt/bin/targets/*/*
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-        tar cvzf newifi3${{ env.FILE_DATE }}.tar.gz *
+        tar cvzf mimini${{ env.FILE_DATE }}.tar.gz *
         curl -F document=@"newifi3${{ env.FILE_DATE }}.tar.gz" -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}"
         curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=$(cat sha256sums)" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
         
@@ -194,8 +194,8 @@ jobs:
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "::set-output name=status::success"
         cd openwrt/bin/targets/*/*/
-        [ -e newifi3${{ env.FILE_DATE }}.tar.gz ] && rm -rf newifi3${{ env.FILE_DATE }}.tar.gz
-        mv openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin lede-newifid2-$(cat sha256sums | grep sysupgrade | cut -c1-8)-$(cat version.buildinfo).bin
+        [ -e mimini${{ env.FILE_DATE }}.tar.gz ] && rm -rf mimini${{ env.FILE_DATE }}.tar.gz
+        #mv openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin lede-newifid2-$(cat sha256sums | grep sysupgrade | cut -c1-8)-$(cat version.buildinfo).bin
         
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
