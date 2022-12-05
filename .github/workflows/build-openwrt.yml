@@ -195,7 +195,7 @@ jobs:
         echo "::set-output name=status::success"
         cd openwrt/bin/targets/*/*/
         [ -e mimini${{ env.FILE_DATE }}.tar.gz ] && rm -rf mimini${{ env.FILE_DATE }}.tar.gz
-        #mv openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin lede-newifid2-$(cat sha256sums | grep sysupgrade | cut -c1-8)-$(cat version.buildinfo).bin
+        mv openwrt-ramips-mt7620-xiaomi_miwifi-mini-squashfs-sysupgrade.bin lede-miwifi-mini-$(cat sha256sums | grep sysupgrade | cut -c1-8)-$(cat version.buildinfo).bin
         
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
