@@ -141,7 +141,7 @@ jobs:
         cd openwrt/bin/targets/*/*
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
         tar cvzf mimini${{ env.FILE_DATE }}.tar.gz *
-        curl -F document=@"newifi3${{ env.FILE_DATE }}.tar.gz" -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}"
+        curl -F document=@"mimini${{ env.FILE_DATE }}.tar.gz" -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument?chat_id=${{ secrets.TELEGRAM_CHAT_ID }}"
         curl -k --data chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" --data "text=$(cat sha256sums)" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage"
         
 
